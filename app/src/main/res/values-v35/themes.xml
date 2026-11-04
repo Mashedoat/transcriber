@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android 15 起 targetSdk 35 强制「边到边」:标题栏会压到状态栏下面、标题又挡住内容
+         (Suj 2026-10-27 真机截图)。先退出强制,用系统默认的留白。 -->
+    <style name="Theme.Zlj" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/forest</item>
+        <item name="colorPrimaryDark">@color/forest_dark</item>
+        <item name="colorAccent">@color/clay</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/forest_dark</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+        <item name="android:textColorSecondary">@color/muted</item>
+        <item name="alertDialogTheme">@style/Theme.Zlj.Dialog</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>

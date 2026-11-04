@@ -1,0 +1,5 @@
+// 版本和 All the best 对齐(本机 ~/.gradle 已缓存,离线也能构建)
+plugins {
+    id 'com.android.application' version '8.7.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.24' apply false
+}

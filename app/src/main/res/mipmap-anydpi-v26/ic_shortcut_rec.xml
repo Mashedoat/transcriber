@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 一键录音:陶土金底 + 米白话筒 + 红色录音点(和主图标同色系,一眼分得开) -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/clay" />
+    <foreground android:drawable="@drawable/ic_shortcut_rec_fg" />
+</adaptive-icon>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 配色取自图标:深林绿 / 米白 / 陶土金 -->
+<resources>
+    <color name="icon_bg">#2F4A3A</color>
+    <color name="forest">#2F4A3A</color>
+    <color name="forest_dark">#233A2D</color>
+    <color name="clay">#D9A066</color>
+    <color name="clay_dark">#B9824C</color>
+    <color name="cream">#F4EFE6</color>
+    <color name="bg">#F4EFE6</color>
+    <color name="surface">#FBF8F2</color>
+    <color name="ink">#22302A</color>
+    <color name="muted">#6E7A72</color>
+    <color name="line">#E3DCCF</color>
+    <color name="rec">#C2553D</color>
+    <color name="on_clay">#FFFFFF</color>
+    <color name="accent">#2F4A3A</color>      <!-- 强调字:白天深绿,夜里陶土金 -->
+</resources>

@@ -1,0 +1,20 @@
+.gradle/
+**/build/
+local.properties
+keystore.properties
+release-key/
+*.jks
+*.keystore
+.env*
+*_api*.json
+*.local.json
+*.apk
+*.aab
+.idea/
+*.iml
+app/emuLibs/
+# Fetch native runtime binaries from the upstream release for local builds.
+app/src/main/jniLibs/**/*.so
+scripts/.cache/
+__pycache__/
+*.pyc

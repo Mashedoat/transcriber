@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 话筒 + 右边三行字:录进去,写出来 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#F4EFE6"
+        android:pathData="M38,34 a8,8 0,0 1 16,0 v16 a8,8 0,0 1 -16,0 z" />
+    <path android:strokeColor="#F4EFE6" android:strokeWidth="3" android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M32,48 a14,14 0,0 0 28,0 M46,62 v8 M40,70 h12" />
+    <path android:strokeColor="#D9A066" android:strokeWidth="3.5" android:strokeLineCap="round"
+        android:pathData="M64,42 h12 M64,52 h16 M64,62 h9" />
+</vector>

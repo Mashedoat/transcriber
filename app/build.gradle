@@ -1,0 +1,93 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+// 公开版的正式签名:钥匙和密码在 android/keystore.properties(不进仓库)。丢了就没法给已装的人升级,务必备份。
+def ksProps = new Properties()
+def ksFile = rootProject.file('keystore.properties')
+if (ksFile.exists()) ksFile.withInputStream { ksProps.load(it) }
+// 自用版连的电脑地址也只写在本机的 local.properties(zlj.server=http://…:8771),不进仓库;公开版用不到
+def localProps = new Properties()
+def localFile = rootProject.file('local.properties')
+if (localFile.exists()) localFile.withInputStream { localProps.load(it) }
+def pcServer = (localProps['zlj.server'] ?: '').toString()
+
+android {
+    namespace 'com.suj.zhuanluji'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 29
+        targetSdk 35
+        ndk { abiFilters 'arm64-v8a' }      // jniLibs 里只放了 arm64 这一套
+    }
+
+    signingConfigs {
+        pub {
+            if (ksProps['storeFile']) {
+                storeFile rootProject.file(ksProps['storeFile'])
+                storePassword ksProps['storePassword']
+                keyAlias ksProps['keyAlias']
+                keyPassword ksProps['keyPassword']
+            }
+        }
+    }
+
+    // 两个版本,同一份代码:
+    //  suj —— 自用:连自己电脑上的服务(备份、电脑稿库、词库同步),地址见上面 zlj.server;debug 签名,装上就能覆盖升级
+    //  pub —— 公开版:不连任何服务器;翻译/精修/问 AI 用用户自己的 key,模型从 GitHub 下
+    flavorDimensions 'dist'
+    productFlavors {
+        suj {
+            dimension 'dist'
+            applicationId 'com.suj.zhuanluji'
+            versionCode 8
+            versionName '0.8'
+            buildConfigField 'boolean', 'PUBLIC', 'false'
+            buildConfigField 'String', 'SERVER', "\"${pcServer}\""
+            manifestPlaceholders = [cleartext: 'true']   // 走 Tailscale 内网 http
+            signingConfig signingConfigs.debug
+        }
+        pub {
+            dimension 'dist'
+            applicationId 'app.zhuanluji'
+            versionCode 3
+            versionName '1.2'
+            buildConfigField 'boolean', 'PUBLIC', 'true'
+            buildConfigField 'String', 'SERVER', '""'
+            manifestPlaceholders = [cleartext: 'false']  // 只连 https
+            signingConfig ksProps['storeFile'] ? signingConfigs.pub : signingConfigs.debug
+        }
+    }
+
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    buildFeatures { buildConfig true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions { jvmTarget = '17' }
+    packagingOptions {
+        jniLibs { useLegacyPackaging true }   // .so 解压到磁盘,onnxruntime 载入更稳
+    }
+
+    // 只给开发电脑上的 x86 模拟器测:`gradlew assembleSujDebug -Pemu`。模拟器靠翻译跑 arm64 时,
+    // onnxruntime 一载入就崩(探 CPU 时空指针),所以测试包另带 x86_64 原生库;给手机的包不带。
+    // EMU=true 时 RecordService 会拿 files/demo.wav 当麦克风(录 demo 视频用),给手机的包恒为 false。
+    if (project.hasProperty('emu')) {
+        defaultConfig.ndk.abiFilters 'x86_64'
+        sourceSets.main.jniLibs.srcDirs += 'emuLibs'
+        defaultConfig.buildConfigField 'boolean', 'EMU', 'true'
+    } else {
+        defaultConfig.buildConfigField 'boolean', 'EMU', 'false'
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'org.apache.commons:commons-compress:1.27.1'   // 公开版:解 GitHub 上的模型包(.tar.bz2)
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Zlj" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/forest</item>
+        <item name="colorPrimaryDark">@color/forest_dark</item>
+        <item name="colorAccent">@color/clay</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/forest_dark</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+        <item name="android:textColorSecondary">@color/muted</item>
+        <item name="alertDialogTheme">@style/Theme.Zlj.Dialog</item>
+    </style>
+
+    <!-- 对话框:米白圆角底,按钮不全大写(以前「从 GITHUB 下载」) -->
+    <style name="Theme.Zlj.Dialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_bg</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+        <item name="android:textColorSecondary">@color/muted</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Zlj.DialogButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Zlj.DialogButton.Quiet</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Zlj.DialogButton.Quiet</item>
+    </style>
+    <style name="Zlj.DialogButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="Zlj.DialogButton.Quiet">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/muted</item>
+    </style>
+
+    <!-- 桌面一键录音的跳板:全透明,无动画 -->
+    <style name="Theme.Zlj.Invisible" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+</resources>

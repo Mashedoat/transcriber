@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 对话框底:米白圆角(比系统的纯白柔和),里面的选项卡片用更亮的 surface,看得出是按钮 -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="16dp" android:insetRight="16dp" android:insetTop="24dp" android:insetBottom="24dp">
+    <shape android:shape="rectangle">
+        <corners android:radius="22dp" />
+        <solid android:color="@color/bg" />
+    </shape>
+</inset>

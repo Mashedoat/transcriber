@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sc_record">一键录音</string>
+    <string name="sc_record_long">开始录音(带实时字幕)</string>
+    <string name="widget_desc">点一下就开始录音</string>
+</resources>

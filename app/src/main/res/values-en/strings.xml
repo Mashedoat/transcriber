@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sc_record">Quick record</string>
+    <string name="sc_record_long">Start recording (live captions)</string>
+    <string name="widget_desc">Tap to start recording</string>
+</resources>
