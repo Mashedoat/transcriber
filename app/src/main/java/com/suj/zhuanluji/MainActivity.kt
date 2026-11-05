@@ -1535,6 +1535,8 @@ class MainActivity : AppCompatActivity() {
                 只有你用「实时翻译」「精修」「问 AI」时,才会把文字稿(不是录音)发给你在「AI 设置」里填的服务,用的是你自己的 key。
 
                 开源组件:sherpa-onnx(Apache-2.0)、Qwen3-ASR(Apache-2.0)、Silero VAD(MIT)、Apache Commons Compress(Apache-2.0)。
+
+                © 2026 Sugiady。本 APK 包含 eSpeak-ng,完整发行包按 GPLv3 发布,不提供担保。你可以按许可修改和再分发;应用自有源码仍提供 MIT 授权。许可证和对应源码见下方入口。
             """.trimIndent(), """
                 Recordings, transcripts, and your vocabulary stay on this phone only — nothing is uploaded. To keep a copy, download the audio from a session's top-right menu.
 
@@ -1543,8 +1545,35 @@ class MainActivity : AppCompatActivity() {
                 Text (never audio) is only sent out when you use "Live translation", "Polish", or "Ask AI" — to the service you set in "AI settings", using your own key.
 
                 Open-source components: sherpa-onnx (Apache-2.0), Qwen3-ASR (Apache-2.0), Silero VAD (MIT), Apache Commons Compress (Apache-2.0).
+
+                © 2026 Sugiady. This APK includes eSpeak-ng and is distributed as a combined work under GPLv3, without warranty. You may modify and redistribute it under those terms; original app source remains available under MIT. See the licenses and corresponding source below.
             """.trimIndent()))
+            .setNeutralButton(t("开源许可", "Licenses")) { _, _ -> showLicenseList() }
+            .setNegativeButton(t("对应源码", "Corresponding source")) { _, _ -> openReleaseSources() }
             .setPositiveButton(t("好", "OK"), null).show()
+    }
+
+    private fun openReleaseSources() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Mashedoat/transcriber/releases/tag/v1.2")))
+    }
+
+    private fun showLicenseList() {
+        val entries = assets.open("licenses/index.json").bufferedReader().use { org.json.JSONArray(it.readText()) }
+        val names = Array(entries.length()) { entries.getJSONObject(it).getString("name") }
+        AlertDialog.Builder(this).setTitle(t("开源许可", "Open-source licenses"))
+            .setItems(names) { _, index ->
+                val entry = entries.getJSONObject(index)
+                val content = assets.open("licenses/" + entry.getString("file")).bufferedReader().use { it.readText() }
+                val text = TextView(this).apply {
+                    this.text = content; textSize = 13f
+                    setPadding(dp(20), dp(8), dp(20), dp(16))
+                    setTextIsSelectable(true)
+                }
+                AlertDialog.Builder(this).setTitle(entry.getString("name"))
+                    .setView(ScrollView(this).apply { addView(text) })
+                    .setNeutralButton(t("对应源码", "Corresponding source")) { _, _ -> openReleaseSources() }
+                    .setPositiveButton(t("好", "OK"), null).show()
+            }.setPositiveButton(t("关闭", "Close"), null).show()
     }
 
     /** 电脑上的稿库(备份来的录音和稿子);dir 给了就直接翻到那场。 */

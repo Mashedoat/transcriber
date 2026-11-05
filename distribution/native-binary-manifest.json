@@ -1,0 +1,31 @@
+{
+  "upstream_asset": "https://github.com/k2-fsa/sherpa-onnx/releases/download/v1.13.8/sherpa-onnx-v1.13.8-android.tar.bz2",
+  "archive_sha256": "2ff63469a71cb6009aa2e3ed5f4a670f8abdcbe4bb9ffd23776afc792a6b4f44",
+  "libraries": [
+    {
+      "name": "libonnxruntime.so",
+      "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "size": 22249560,
+      "upstream_archive_member": "./jniLibs/arm64-v8a/libonnxruntime.so"
+    },
+    {
+      "name": "libsherpa-onnx-c-api.so",
+      "sha256": "c85e2382e2ca12b0513826be926eaccfea896b4cbf568182e287671ba526f80d",
+      "size": 4465168,
+      "upstream_archive_member": "./jniLibs/arm64-v8a/libsherpa-onnx-c-api.so"
+    },
+    {
+      "name": "libsherpa-onnx-cxx-api.so",
+      "sha256": "5eabb2bcf5a8af66aeab37431c09fab4a9c65cdebf02bd7e50f8c589044bd70e",
+      "size": 440688,
+      "upstream_archive_member": "./jniLibs/arm64-v8a/libsherpa-onnx-cxx-api.so"
+    },
+    {
+      "name": "libsherpa-onnx-jni.so",
+      "sha256": "3c6492ea91ea68fd3b72b9495efdde6dd913f6b58c387e3b07389cf335f4d26f",
+      "size": 4771760,
+      "upstream_archive_member": "./jniLibs/arm64-v8a/libsherpa-onnx-jni.so"
+    }
+  ],
+  "restore_script_verified": true
+}

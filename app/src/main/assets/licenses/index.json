@@ -1,0 +1,46 @@
+[
+  {
+    "name": "APK — GNU GPL version 3",
+    "file": "apk-gpl-3.txt"
+  },
+  {
+    "name": "Transcriber — MIT",
+    "file": "transcriber-mit.txt"
+  },
+  {
+    "name": "Components and source / 组件与源码",
+    "file": "components.txt"
+  },
+  {
+    "name": "Silero VAD — MIT",
+    "file": "silero-vad.txt"
+  },
+  {
+    "name": "sherpa-onnx",
+    "file": "sherpa-onnx.txt"
+  },
+  {
+    "name": "espeak-ng-for-piper",
+    "file": "espeak-ng-for-piper.txt"
+  },
+  {
+    "name": "espeak-ucd-tools",
+    "file": "espeak-ucd-tools.txt"
+  },
+  {
+    "name": "piper-phonemize",
+    "file": "piper-phonemize.txt"
+  },
+  {
+    "name": "onnxruntime",
+    "file": "onnxruntime.txt"
+  },
+  {
+    "name": "Other native components / 其他原生组件",
+    "file": "other-native.txt"
+  },
+  {
+    "name": "Android / Kotlin / Apache dependencies",
+    "file": "maven-notices.txt"
+  }
+]

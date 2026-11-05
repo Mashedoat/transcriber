@@ -49,7 +49,7 @@ def main():
                 shutil.copyfileobj(source, target)
             partial.replace(dest / name)
             print(f"Restored arm64-v8a/{name}")
-    print("Native binaries are for local builds. Read THIRD_PARTY_NOTICES.md before redistributing any APK.")
+    print("Native runtime restored. Read DISTRIBUTION.md and THIRD_PARTY_NOTICES.md before redistributing the GPLv3 APK.")
 
 if __name__ == "__main__":
     main()

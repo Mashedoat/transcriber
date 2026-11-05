@@ -1,0 +1,306 @@
+[
+  {
+    "name": "ort-abseil_cpp",
+    "url": "https://github.com/abseil/abseil-cpp/archive/refs/tags/20250814.0.zip",
+    "archive": "ort-abseil_cpp.zip",
+    "expected_sha1": "a9eb1d648cbca4d4d788737e971a6a7a63726b07",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "b2bdcf6682d8cb53df365bcc5d6c318a22e55821d9978a10fdb61404c026daff",
+    "size": 3194036,
+    "notice_files": [
+      "abseil-cpp-20250814.0/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-cxxopts",
+    "url": "https://github.com/jarro2783/cxxopts/archive/3c73d91c0b04e2b59462f0a741be8c07024c1bc0.zip",
+    "archive": "ort-cxxopts.zip",
+    "expected_sha1": "6c6ca7f8480b26c8d00476e0e24b7184717fe4f0",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "57b5f012372d4c0e0a975b2e534e9af647cd20530fc72f73a75a61e05e0f997e",
+    "size": 98330,
+    "notice_files": [
+      "cxxopts-3c73d91c0b04e2b59462f0a741be8c07024c1bc0/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-date",
+    "url": "https://github.com/HowardHinnant/date/archive/refs/tags/v3.0.1.zip",
+    "archive": "ort-date.zip",
+    "expected_sha1": "2dac0c81dc54ebdd8f8d073a75c053b04b56e159",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "f4300b96f7a304d4ef9bf6e0fa3ded72159f7f2d0f605bdde3e030a0dba7cf9f",
+    "size": 941286,
+    "notice_files": [
+      "date-3.0.1/LICENSE.txt"
+    ]
+  },
+  {
+    "name": "ort-dlpack",
+    "url": "https://github.com/dmlc/dlpack/archive/5c210da409e7f1e51ddf445134a4376fdbd70d7d.zip",
+    "archive": "ort-dlpack.zip",
+    "expected_sha1": "e499c86e4e5c5268a87661d7ea39c27fae10907c",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "14e8b3f03ab7461f56b3fa7ffd4acfb6e6a65f895dc4b50548cab259229afcbd",
+    "size": 228363,
+    "notice_files": [
+      "dlpack-5c210da409e7f1e51ddf445134a4376fdbd70d7d/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-eigen",
+    "url": "https://github.com/eigen-mirror/eigen/archive/1d8b82b0740839c0de7f1242a3585e3390ff5f33.zip",
+    "archive": "ort-eigen.zip",
+    "expected_sha1": "05b19b49e6fbb91246be711d801160528c135e34",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0",
+    "size": 4075744,
+    "notice_files": [
+      "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.APACHE",
+      "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.BSD",
+      "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.MINPACK",
+      "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.MPL2",
+      "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.README",
+      "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-flatbuffers",
+    "url": "https://github.com/google/flatbuffers/archive/refs/tags/v23.5.26.zip",
+    "archive": "ort-flatbuffers.zip",
+    "expected_sha1": "59422c3b5e573dd192fead2834d25951f1c1670c",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "57bd580c0772fd1a726c34ab8bf05325293bc5f9c165060a898afa1feeeb95e1",
+    "size": 3209602,
+    "notice_files": [
+      "flatbuffers-23.5.26/LICENSE",
+      "flatbuffers-23.5.26/dart/LICENSE",
+      "flatbuffers-23.5.26/swift/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-fp16",
+    "url": "https://github.com/Maratyszcza/FP16/archive/0a92994d729ff76a58f692d3028ca1b64b145d91.zip",
+    "archive": "ort-fp16.zip",
+    "expected_sha1": "b985f6985a05a1c03ff1bb71190f66d8f98a1494",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "e66e65515fa09927b348d3d584c68be4215cfe664100d01c9dbc7655a5716d70",
+    "size": 91373,
+    "notice_files": [
+      "FP16-0a92994d729ff76a58f692d3028ca1b64b145d91/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-fxdiv",
+    "url": "https://github.com/Maratyszcza/FXdiv/archive/63058eff77e11aa15bf531df5dd34395ec3017c8.zip",
+    "archive": "ort-fxdiv.zip",
+    "expected_sha1": "a5658f4036402dbca7cebee32be57fb8149811e1",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "3d7b0e9c4c658a84376a1086126be02f9b7f753caa95e009d9ac38d11da444db",
+    "size": 16646,
+    "notice_files": [
+      "FXdiv-63058eff77e11aa15bf531df5dd34395ec3017c8/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-google_benchmark",
+    "url": "https://github.com/google/benchmark/archive/refs/tags/v1.8.5.zip",
+    "archive": "ort-google_benchmark.zip",
+    "expected_sha1": "cd47d3d272faf353600c8cc2fdec2b52d6f69177",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "39f57865cdbfa06f02ae91ea76465246046cc47d5908aa5a3abeb9026fb73dcc",
+    "size": 327614,
+    "notice_files": [
+      "benchmark-1.8.5/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-googletest",
+    "url": "https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip",
+    "archive": "ort-googletest.zip",
+    "expected_sha1": "f638fa0e724760e2ba07ff8cfba32cd644e1ce28",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "40d4ec942217dcc84a9ebe2a68584ada7d4a33a8ee958755763278ea1c5e18ff",
+    "size": 1114942,
+    "notice_files": [
+      "googletest-1.17.0/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-googlexnnpack",
+    "url": "https://github.com/google/XNNPACK/archive/3cf85e705098622d59056dcb8f5f963ea7bb0a00.zip",
+    "archive": "ort-googlexnnpack.zip",
+    "expected_sha1": "6f6bbba627241f89463ca845febaf063982b34fe",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "e4af7bc17f1e0bce0e83098af24c3c3c2ade70351c2e29318aff1404a8974544",
+    "size": 22580852,
+    "notice_files": [
+      "XNNPACK-3cf85e705098622d59056dcb8f5f963ea7bb0a00/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-json",
+    "url": "https://github.com/nlohmann/json/archive/refs/tags/v3.11.3.zip",
+    "archive": "ort-json.zip",
+    "expected_sha1": "5e88795165cc8590138d1f47ce94ee567b85b4d6",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "04022b05d806eb5ff73023c280b68697d12b93e1b7267a0b22a1a39ec7578069",
+    "size": 8489998,
+    "notice_files": [
+      "json-3.11.3/LICENSE.MIT"
+    ]
+  },
+  {
+    "name": "ort-microsoft_gsl",
+    "url": "https://github.com/microsoft/GSL/archive/refs/tags/v4.2.1.zip",
+    "archive": "ort-microsoft_gsl.zip",
+    "expected_sha1": "1094e3bb7a8af763dcb136ccd676e6e75e614eec",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "c9291d95f5f6e5c561990d06a589b01d89e553d0f366f0ce723dd1788e7a6076",
+    "size": 84222,
+    "notice_files": [
+      "GSL-4.2.1/LICENSE",
+      "GSL-4.2.1/ThirdPartyNotices.txt"
+    ]
+  },
+  {
+    "name": "ort-mimalloc",
+    "url": "https://github.com/microsoft/mimalloc/archive/refs/tags/v2.1.1.zip",
+    "archive": "ort-mimalloc.zip",
+    "expected_sha1": "d5ee7d34223d0567892db5179849939c8769dc41",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "23b1bffb2eff57b1e3cb8edc9410d448db2bb43400206a151e107dcabcad773a",
+    "size": 1301043,
+    "notice_files": [
+      "mimalloc-2.1.1/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-mp11",
+    "url": "https://github.com/boostorg/mp11/archive/refs/tags/boost-1.82.0.zip",
+    "archive": "ort-mp11.zip",
+    "expected_sha1": "9bc9e01dffb64d9e0773b2e44d2f22c51aace063",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "81431bdc44c439a324e02c07ed067f8f556419fd86f2d8b486ff568df6aac899",
+    "size": 232716,
+    "notice_files": []
+  },
+  {
+    "name": "ort-onnx",
+    "url": "https://github.com/onnx/onnx/archive/refs/tags/v1.22.0.zip",
+    "archive": "ort-onnx.zip",
+    "expected_sha1": "2b2cd58ac7a26df5371266149e0c76776330cdf1",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "8dc1181d33529a1249e031226126d0699ac9bdfc571ee530ee3a12f4656f2be3",
+    "size": 18911779,
+    "notice_files": [
+      "onnx-1.22.0/LICENSE",
+      "onnx-1.22.0/NOTICE"
+    ]
+  },
+  {
+    "name": "ort-protobuf",
+    "url": "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v21.12.zip",
+    "archive": "ort-protobuf.zip",
+    "expected_sha1": "7cf2733949036c7d52fda017badcab093fe73bfa",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "6a31b662deaeb0ac35e6287bda2f3369b19836e6c9f8828d4da444346f420298",
+    "size": 7180794,
+    "notice_files": [
+      "protobuf-21.12/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-psimd",
+    "url": "https://github.com/Maratyszcza/psimd/archive/072586a71b55b7f8c584153d223e95687148a900.zip",
+    "archive": "ort-psimd.zip",
+    "expected_sha1": "1f5454b01f06f9656b77e4a5e2e31d7422487013",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "dc615342bcbe51ca885323e51b68b90ed9bb9fa7df0f4419dbfa0297d5e837b7",
+    "size": 8327,
+    "notice_files": [
+      "psimd-072586a71b55b7f8c584153d223e95687148a900/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-pthreadpool",
+    "url": "https://github.com/google/pthreadpool/archive/dcc9f28589066af0dbd4555579281230abbf74dd.zip",
+    "archive": "ort-pthreadpool.zip",
+    "expected_sha1": "533a77943203ef15ca608bcd9dbe2c94da7451d2",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "b193fcb18abf0d5bdb989968ccd8e274ae0ce8d89b0f1a61763582fb716b259c",
+    "size": 104991,
+    "notice_files": [
+      "pthreadpool-dcc9f28589066af0dbd4555579281230abbf74dd/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-pybind11",
+    "url": "https://github.com/pybind/pybind11/archive/refs/tags/v3.0.2.zip",
+    "archive": "ort-pybind11.zip",
+    "expected_sha1": "a064e663b4d7a337ac291d1bef7337ef4e60a1ae",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "e3754d16ea536bdc968ce1464fa822e198a1217881d31bd9bf3d287fed2bbf4c",
+    "size": 1112516,
+    "notice_files": [
+      "pybind11-3.0.2/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-pytorch_cpuinfo",
+    "url": "https://github.com/pytorch/cpuinfo/archive/4628dc060ce4e82345dc166bbac875609db4ff69.zip",
+    "archive": "ort-pytorch_cpuinfo.zip",
+    "expected_sha1": "e58d4b47c16a982111c897e669ae4f1821a393d7",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "2ed3ebc6c2656cc0aafc7af319e5cb0f97cc9b415eae180f566def84f1ca6a29",
+    "size": 3857758,
+    "notice_files": [
+      "cpuinfo-4628dc060ce4e82345dc166bbac875609db4ff69/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-re2",
+    "url": "https://github.com/google/re2/archive/refs/tags/2024-07-02.zip",
+    "archive": "ort-re2.zip",
+    "expected_sha1": "646e1728269cde7fcef990bf4a8e87b047882e88",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "a835fe55fbdcd8e80f38584ab22d0840662c67f2feb36bd679402da9641dc71e",
+    "size": 451539,
+    "notice_files": [
+      "re2-2024-07-02/LICENSE",
+      "re2-2024-07-02/python/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-safeint",
+    "url": "https://github.com/dcleblanc/SafeInt/archive/refs/tags/3.0.28.zip",
+    "archive": "ort-safeint.zip",
+    "expected_sha1": "23f252040ff6cb9f1fd18575b32fa8fb5928daac",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "3ffbd9a2fdff45da77da3e7269e9aa512ea43bed5c38ce8fd8f3d1068a032c3f",
+    "size": 626378,
+    "notice_files": [
+      "SafeInt-3.0.28/LICENSE"
+    ]
+  },
+  {
+    "name": "ort-kleidiai",
+    "url": "https://github.com/ARM-software/kleidiai/archive/refs/tags/v1.20.0.tar.gz",
+    "archive": "ort-kleidiai.tar.gz",
+    "expected_sha1": "6895e72b3d5cf1173358164cb3d64c9d7d33cc84",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "e4b84c369f0f39af1660ac71c30f74038d4b89e1f20dde070bb96398382a111f",
+    "size": 2372189,
+    "notice_files": []
+  },
+  {
+    "name": "ort-kleidiai-qmx",
+    "url": "https://github.com/qualcomm/kleidiai/archive/2f10c9a8d32f81ffeeb6d4885a29cc35d2b0da87.zip",
+    "archive": "ort-kleidiai-qmx.zip",
+    "expected_sha1": "5e855730a2d69057a569f43dd7532db3b2d2a05c",
+    "declaration": "onnxruntime/cmake/deps.txt",
+    "sha256": "ee43dee0fac9a641f87285fa357c5db3849aa7a4955e86f6818390313e610e5e",
+    "size": 2994473,
+    "notice_files": []
+  }
+]

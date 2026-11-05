@@ -4,6 +4,8 @@ Android 会议与访谈录音工具。字幕在手机上离线识别；需要整
 
 Android 10+ · arm64-v8a · 中文 / English · 源码版本 1.2
 
+[下载 APK](https://github.com/Mashedoat/transcriber/releases/download/v1.2/transcriber-v1.2-android.apk) · [对应源码包](https://github.com/Mashedoat/transcriber/releases/download/v1.2/transcriber-v1.2-corresponding-source.zip) · [发行说明](https://github.com/Mashedoat/transcriber/releases/tag/v1.2)
+
 ## 能做什么
 
 - 录音并显示离线字幕，使用 Qwen3-ASR 0.6B int8 和 sherpa-onnx。
@@ -16,7 +18,7 @@ Android 10+ · arm64-v8a · 中文 / English · 源码版本 1.2
 
 ## 第一次使用
 
-1. 先按下文从源码编译并安装。目前这个仓库没有发布可下载 APK。
+1. 从上方链接安装公开版 APK，也可以按下文从源码编译。
 2. 在 App 中下载或导入识别模型：`sherpa-onnx-qwen3-asr-0.6B-int8-2026-03-25.tar.bz2`，压缩包约 879 MB，来源为 [sherpa-onnx 官方模型发布页](https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models)。下载、解压需要额外空闲空间。模型就位后，录音和转写可离线使用。
 3. 想用 AI 功能，在「AI 设置」选择 DeepSeek 或 GPT，填写对应服务的 key。两家的设置分别保存，切换服务会载入该服务自己的 key；不会复用另一家的 key。
 4. GPT 默认模型为 `gpt-6-luna`；DeepSeek 保留 `deepseek-flash` 默认值。服务地址和模型名称可编辑，需使用 HTTPS，并以对应服务实际可用的模型为准。
@@ -56,7 +58,7 @@ python3 scripts/fetch_native.py
 # Windows：.\gradlew.bat assemblePubDebug
 ```
 
-调试包输出在 `app/build/outputs/apk/pub/debug/`。发布构建使用 `assemblePubRelease`；缺少本地 `keystore.properties` 时沿用 debug 签名，仅适合本地试用。签名文件、密码和 API key 不应提交。
+调试包输出在 `app/build/outputs/apk/pub/debug/`。发布构建使用 `assemblePubRelease`；缺少本地 `keystore.properties` 时沿用 debug 签名，仅适合本地试用。也可通过 `-PsigningProperties=/path/to/keystore.properties` 指定工作区之外的本机签名配置，`storeFile` 相对该配置文件所在目录解析。签名文件、密码和 API key 不应提交。自行编译可使用自己的签名，作者私钥不属于源码发行材料。
 
 Gradle Wrapper 使用官方 Gradle 8.11.1 下载地址。构建还需从配置的 Maven 仓库获取 Android/Kotlin 依赖。仓库同时保留 `suj` flavor 供本地配套开发；配套电脑服务不在本仓库，公开版使用 `pub` flavor。
 
@@ -64,13 +66,15 @@ Gradle Wrapper 使用官方 Gradle 8.11.1 下载地址。构建还需从配置�
 
 公开版 `assemblePubRelease` 与 `lintPubRelease` 通过，静态检查保留 21 项警告。GPT-6 Luna 使用虚构文本的翻译、结构化整理和带出处网页搜索接口测试通过。这里的接口测试在开发电脑运行，不等于手机端界面或完整录音流程的测试；本次未做手机端回归。
 
-构建使用本机已有的原生库。恢复脚本已做语法检查，官方下载、校验及恢复链路未在本次环境完整验证；初次构建仍依赖能够访问上游发布文件。
+原生库与官方 v1.13.8 Android 包中的四个 arm64 库逐一匹配。已通过 GitHub 官方资产 API 下载原包、核对固定 SHA-256，并验证恢复脚本的 `--archive` 路径。本机访问普通 GitHub 下载域名曾超时；默认下载地址的连通性仍取决于网络。Release 的对应源码包已附这四个库，直接解压编译时可跳过恢复步骤。
 
 ## 许可证与发行范围
 
 应用自有代码沿用 [MIT](LICENSE)。复制的 sherpa-onnx Kotlin 接口保留原版权及 Apache-2.0 许可，随附 Silero VAD 使用 MIT。详见 [第三方说明](THIRD_PARTY_NOTICES.md) 和 [licenses](licenses/)。
 
-本仓库公开应用源码、接口绑定及 VAD 文件，不分发原生库或 APK。现有 sherpa-onnx 预编译库包含 eSpeak-ng 相关代码；其上游许可证为 GPLv3，不能仅凭 sherpa-onnx 顶层的 Apache-2.0 就把完整 APK 声明为纯 MIT。对外分发 APK 前，需解决相关许可证、对应源码和构建信息的提供，或使用经过核验、不含相关组件的 ASR 专用运行库。
+公开 APK 保留现有原生库，作为组合发行包遵循 **GPLv3**，不提供担保；应用自有源码仍保留 MIT 授权，第三方组件保留原有版权和许可。完整 GPLv3 见 [APK-LICENSE.txt](APK-LICENSE.txt)，App 内「关于与隐私 → 开源许可」也可阅读。
+
+同一 Release 提供对应源码包，包含本应用源码、固定版本的原生依赖源码、Maven 源码、原生库构建配方和来源清单。原生库中的 sherpa-onnx 与 ONNX Runtime 修订号从二进制内嵌元数据核对。详见 [DISTRIBUTION.md](DISTRIBUTION.md)。源码不包含作者 API key、录音、稿件、签名私钥或本机服务配置。
 
 ## English
 
@@ -78,4 +82,4 @@ Transcriber records meetings and interviews, runs offline captions on Android wi
 
 In AI settings, choose **DeepSeek** or **GPT · Luna**. Each provider keeps its own key, endpoint and model. GPT defaults to `gpt-6-luna` and uses the Responses API with response storage disabled. Audio stays on-device; AI features send relevant transcript text and context to the selected provider. Web search can add costs. App data is excluded from Android cloud backup and device transfer; export important recordings before uninstalling.
 
-This is a **source release**, with no downloadable APK or native binaries. Restore native dependencies using `python3 scripts/fetch_native.py`, then build `./gradlew assemblePubDebug` with JDK 17+ and Android SDK 35. The upstream native runtime includes eSpeak-ng code with GPLv3 licensing; review [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) before redistributing any compiled app. The source-level MIT license does not replace third-party terms.
+The published APK is distributed as a combined work under **GPLv3**, without warranty, and includes a license viewer and a corresponding-source link. Original app source remains MIT; third-party notices remain in force. The same Release supplies the corresponding source bundle and native build recipes. For local builds, restore native dependencies with `python3 scripts/fetch_native.py`, then run `./gradlew assemblePubDebug` with JDK 17+ and Android SDK 35. See [DISTRIBUTION.md](DISTRIBUTION.md) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

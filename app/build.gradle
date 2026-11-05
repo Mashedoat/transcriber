@@ -5,7 +5,7 @@ plugins {
 
 // 公开版的正式签名:钥匙和密码在 android/keystore.properties(不进仓库)。丢了就没法给已装的人升级,务必备份。
 def ksProps = new Properties()
-def ksFile = rootProject.file('keystore.properties')
+def ksFile = rootProject.file(providers.gradleProperty('signingProperties').getOrElse('keystore.properties'))
 if (ksFile.exists()) ksFile.withInputStream { ksProps.load(it) }
 // 自用版连的电脑地址也只写在本机的 local.properties(zlj.server=http://…:8771),不进仓库;公开版用不到
 def localProps = new Properties()
@@ -26,7 +26,8 @@ android {
     signingConfigs {
         pub {
             if (ksProps['storeFile']) {
-                storeFile rootProject.file(ksProps['storeFile'])
+                def configuredStore = new File(ksProps['storeFile'])
+                storeFile(configuredStore.isAbsolute() ? configuredStore : new File(ksFile.parentFile, ksProps['storeFile']))
                 storePassword ksProps['storePassword']
                 keyAlias ksProps['keyAlias']
                 keyPassword ksProps['keyPassword']
