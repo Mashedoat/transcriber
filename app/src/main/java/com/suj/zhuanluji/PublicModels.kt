@@ -2,7 +2,6 @@ package com.suj.zhuanluji
 
 import android.content.Context
 import android.net.Uri
-import android.provider.OpenableColumns
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import java.io.BufferedInputStream
@@ -20,7 +19,9 @@ import java.net.HttpURLConnection
  */
 object PublicModels {
     const val URL = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/${Engine.QWEN}.tar.bz2"
-    const val SIZE = 878_702_423L            // 2026-03-25 这版的字节数,下完对一下
+    const val SIZE = 878_702_423L
+    // Official GitHub release asset 390698077; provenance: distribution/model-package.json.
+    const val SHA256 = "393f8a14e2f5fb96746aaab342997a40641001fbd5bf9592a080a8329178ee96"
     private const val UNPACKED = 990_000_000L
 
     private fun need() = Engine.required().filter { it.startsWith(Engine.QWEN + "/") }.toSet()
@@ -33,7 +34,7 @@ object PublicModels {
     /** 从 GitHub 下(断点续传)再解包。 */
     fun download(progress: (String) -> Unit) {
         val pkg = File(Engine.modelDir, "${Engine.QWEN}.tar.bz2")
-        checkSpace(SIZE - pkg.length() + UNPACKED)
+        checkSpace((SIZE - pkg.length()).coerceAtLeast(0) + UNPACKED)
         var tries = 0
         while (pkg.length() < SIZE) {
             try {
@@ -44,18 +45,42 @@ object PublicModels {
                 Thread.sleep(3000)
             }
         }
-        if (pkg.length() != SIZE) { pkg.delete(); error(t("模型包大小不对,已删掉,请重下", "Model package size is wrong, deleted it — please download again")) }
+        try {
+            pkg.inputStream().use { verify(it, progress) }
+        } catch (e: ModelPackageIntegrity.InvalidPackage) {
+            pkg.delete()
+            error(t("模型包大小或 SHA-256 校验失败,请重新下载", "Model package size or SHA-256 check failed; please download again"))
+        }
         pkg.inputStream().use { extract(it, SIZE, progress) }
         pkg.delete()
     }
 
     /** 用户从手机文件里选的模型包。 */
     fun importLocal(c: Context, uri: Uri, progress: (String) -> Unit) {
-        val size = c.contentResolver.query(uri, arrayOf(OpenableColumns.SIZE), null, null, null)?.use {
-            if (it.moveToFirst()) it.getLong(0) else -1L
-        } ?: -1L
-        checkSpace(UNPACKED)
-        (c.contentResolver.openInputStream(uri) ?: error(t("打不开这个文件", "Can't open this file"))).use { extract(it, size, progress) }
+        checkSpace(SIZE + UNPACKED)
+        // Verify and extract the same private copy; a provider may return different bytes on reopen.
+        val pkg = File.createTempFile("model-import-", ".tar.bz2", Engine.modelDir)
+        try {
+            (c.contentResolver.openInputStream(uri) ?: error(t("打不开这个文件", "Can't open this file"))).use { src ->
+                pkg.outputStream().use { out -> verify(src, progress, out) }
+            }
+            pkg.inputStream().use { extract(it, SIZE, progress) }
+        } catch (e: ModelPackageIntegrity.InvalidPackage) {
+            error(t("模型包大小或 SHA-256 校验失败,请选择官方原始模型包", "Model package size or SHA-256 check failed; select the original official archive"))
+        } finally {
+            pkg.delete()
+        }
+    }
+
+    private fun verify(src: InputStream, progress: (String) -> Unit, copyTo: java.io.OutputStream? = null) {
+        var lastPct = -1L
+        ModelPackageIntegrity.verify(src, SIZE, SHA256, copyTo) { bytes ->
+            val pct = bytes * 100 / SIZE
+            if (pct != lastPct) {
+                lastPct = pct
+                progress(t("校验模型包 $pct%", "Verifying model package $pct%"))
+            }
+        }
     }
 
     /** GitHub 的下载会 302 到一个限时签名地址:每次续传都重新解析,自己跟跳转,Range 头才不会丢。 */
