@@ -2,7 +2,6 @@ package com.suj.zhuanluji
 
 import android.content.Context
 import android.net.Uri
-import android.provider.OpenableColumns
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import java.io.BufferedInputStream
@@ -21,7 +20,7 @@ import java.net.HttpURLConnection
 object PublicModels {
     const val URL = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/${Engine.QWEN}.tar.bz2"
     const val SIZE = 878_702_423L            // 2026-03-25 这版的字节数,下完对一下
-    // GitHub release asset 390698077, SHA-256 of the complete .tar.bz2.
+    // GitHub release asset 390698077; provenance: distribution/model-package.json.
     private const val SHA256 = "393f8a14e2f5fb96746aaab342997a40641001fbd5bf9592a080a8329178ee96"
     private const val UNPACKED = 990_000_000L
 
@@ -35,7 +34,7 @@ object PublicModels {
     /** 从 GitHub 下(断点续传)再解包。 */
     fun download(progress: (String) -> Unit) {
         val pkg = File(Engine.modelDir, "${Engine.QWEN}.tar.bz2")
-        checkSpace(SIZE - pkg.length() + UNPACKED)
+        checkSpace((SIZE - pkg.length()).coerceAtLeast(0) + UNPACKED)
         var tries = 0
         while (pkg.length() < SIZE) {
             try {
@@ -58,11 +57,21 @@ object PublicModels {
 
     /** 用户从手机文件里选的模型包。 */
     fun importLocal(c: Context, uri: Uri, progress: (String) -> Unit) {
-        val size = c.contentResolver.query(uri, arrayOf(OpenableColumns.SIZE), null, null, null)?.use {
-            if (it.moveToFirst()) it.getLong(0) else -1L
-        } ?: -1L
-        checkSpace(UNPACKED)
-        (c.contentResolver.openInputStream(uri) ?: error(t("打不开这个文件", "Can't open this file"))).use { extract(it, size, progress) }
+        checkSpace(SIZE + UNPACKED)
+        // Verify and extract the same private copy, without trusting provider size metadata
+        // or reopening a provider that could return different bytes the second time.
+        val pkg = File.createTempFile("model-import-", ".tar.bz2", Engine.modelDir)
+        try {
+            progress(t("正在校验模型包…", "Verifying model package…"))
+            val valid = (c.contentResolver.openInputStream(uri)
+                ?: error(t("打不开这个文件", "Can't open this file"))).use {
+                ModelArchiveVerifier.copyAndVerify(it, pkg, SIZE, SHA256)
+            }
+            if (!valid) error(t("模型包校验失败,请选择官方原始模型包", "Model package verification failed; select the original official archive"))
+            pkg.inputStream().use { extract(it, SIZE, progress) }
+        } finally {
+            pkg.delete()
+        }
     }
 
     /** GitHub 的下载会 302 到一个限时签名地址:每次续传都重新解析,自己跟跳转,Range 头才不会丢。 */

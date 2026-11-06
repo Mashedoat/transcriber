@@ -1,0 +1,10 @@
+{
+  "name": "sherpa-onnx-qwen3-asr-0.6B-int8-2026-03-25.tar.bz2",
+  "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-qwen3-asr-0.6B-int8-2026-03-25.tar.bz2",
+  "size": 878702423,
+  "sha256": "393f8a14e2f5fb96746aaab342997a40641001fbd5bf9592a080a8329178ee96",
+  "checksum_source": "https://api.github.com/repos/k2-fsa/sherpa-onnx/releases/assets/390698077",
+  "checksum_source_field": "digest",
+  "verified_metadata_on": "2026-11-06",
+  "upstream_asset_updated_at": "2026-04-07T09:52:53Z"
+}

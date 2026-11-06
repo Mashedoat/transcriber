@@ -2,6 +2,7 @@ package com.suj.zhuanluji;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
@@ -10,6 +11,24 @@ import java.security.NoSuchAlgorithmException;
 /** Verifies the complete compressed archive before any of its contents are extracted. */
 final class ModelArchiveVerifier {
     private ModelArchiveVerifier() {}
+
+    /** Copies a provider stream into a private file, bounded by the official archive size.
+     * The caller owns the input and must delete the temporary file on every exit path.
+     */
+    static boolean copyAndVerify(InputStream input, File archive, long expectedSize,
+                                 String expectedSha256) throws IOException {
+        long total = 0;
+        try (FileOutputStream out = new FileOutputStream(archive)) {
+            byte[] buffer = new byte[64 * 1024];
+            int count;
+            while ((count = input.read(buffer)) != -1) {
+                if (count > expectedSize - total) return false;
+                out.write(buffer, 0, count);
+                total += count;
+            }
+        }
+        return matches(archive, expectedSize, expectedSha256);
+    }
 
     static boolean matches(File archive, long expectedSize, String expectedSha256) throws IOException {
         if (archive.length() != expectedSize) return false;
