@@ -135,7 +135,7 @@ class WorkService : Service() {
                                 t("\n转好的部分已存好,点「重新整理」从断处接着转", "\nWhat's transcribed so far is saved; tap \"Re-process\" to continue from there")
                             task is Task.Backup -> t("\n手机要开着 Tailscale;再点一次会从断点接着传", "\nPhone needs Tailscale connected; tap again to resume where it stopped")
                             task is Task.Polish -> t("\n做完的部分已存好,再点「精修」从断处接着做", "\nWhat's done so far is saved; tap \"Polish\" again to continue from there")
-                            task is Task.Models && task.local == null -> t("\n再点一次「下载模型」会接着下", "\nTap \"Download models\" again to resume")
+                            task is Task.Models && task.local == null -> t("\n再点一次「下载模型」重试", "\nTap \"Download models\" to retry")
                             else -> ""
                         })
                     }

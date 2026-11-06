@@ -21,6 +21,8 @@ import java.net.HttpURLConnection
 object PublicModels {
     const val URL = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/${Engine.QWEN}.tar.bz2"
     const val SIZE = 878_702_423L            // 2026-03-25 这版的字节数,下完对一下
+    // GitHub release asset 390698077, SHA-256 of the complete .tar.bz2.
+    private const val SHA256 = "393f8a14e2f5fb96746aaab342997a40641001fbd5bf9592a080a8329178ee96"
     private const val UNPACKED = 990_000_000L
 
     private fun need() = Engine.required().filter { it.startsWith(Engine.QWEN + "/") }.toSet()
@@ -44,7 +46,12 @@ object PublicModels {
                 Thread.sleep(3000)
             }
         }
-        if (pkg.length() != SIZE) { pkg.delete(); error(t("模型包大小不对,已删掉,请重下", "Model package size is wrong, deleted it — please download again")) }
+        progress(t("正在校验模型包…", "Verifying model package…"))
+        if (!ModelArchiveVerifier.matches(pkg, SIZE, SHA256)) {
+            val deleted = pkg.delete()
+            error(if (deleted) t("模型包校验失败,已删掉,请重下", "Model package verification failed; deleted it. Please download again")
+                else t("模型包校验失败,无法删除;请手动删除后重试", "Model package verification failed and could not be deleted; delete it manually before retrying"))
+        }
         pkg.inputStream().use { extract(it, SIZE, progress) }
         pkg.delete()
     }
